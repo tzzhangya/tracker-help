@@ -1,0 +1,31 @@
+{
+    "plugins": [
+        "highlight",
+        "image-zoom"
+    ],
+    "pluginsConfig": {
+        "highlight": {
+            "defaultLanguage": "markup"
+        },
+        "theme-default": {
+            "show_nav": true,
+            "logo": {
+                "image": "https:\/\/img.kancloud.cn\/4e\/45\/4e45172f86ac746e40eb69c2827ae271_157x77.png",
+                "url": "https:\/\/business.swoole.com\/"
+            }
+        }
+    },
+    "themeConfig": {
+        "expandLevel": 1,
+        "navs": [
+            {
+                "title": "Swoole Tracker 详细手册",
+                "url": "http:\/\/wiki.tracker.swoole-cloud.com"
+            },
+            {
+                "title": "基础手册",
+                "url": "http:\/\/base-wiki.tracker.swoole-cloud.com"
+            }
+        ]
+    }
+}

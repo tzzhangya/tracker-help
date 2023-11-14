@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>tracker服务端 - Untitled</title>
+    
+    
+</head>
+<body>
+<div id="root"></div>
+<script type="application/payload+json">
+{"id":"Danza8","sha":"9b03cba29e98068f74f4a8edfa139813c3f985c3","summary":[{"title":"","articles":[{"title":"安装说明","ref":"installation.md","path":"installation.html","metadata":{"mtime":"2021-10-20T17:33:54+08:00"},"children":[{"title":"tracker服务端","ref":"installation\/server.md","path":"installation\/server.html","metadata":{"mtime":"2020-10-01T02:43:42+00:00"},"children":[{"title":"数据存储","ref":"installation\/server\/data-storage.md","path":"installation\/server\/data-storage.html"},{"title":"更换数据存储配置","ref":"change-db.md","path":"change-db.html"},{"title":"Server管理","ref":"installation\/server\/manage.md","path":"installation\/server\/manage.html"},{"title":"数据清理","ref":"installation\/clean-log.md","path":"installation\/clean-log.html"}]},{"title":"tracker客户端","ref":"installation\/client.md","path":"installation\/client.html","children":[{"title":"系统配置","ref":"installation\/client\/agent-config.md","path":"installation\/client\/agent-config.html"},{"title":"自定义配置","ref":"installation\/client\/user-config.md","path":"installation\/client\/user-config.html"},{"title":"链路追踪扩展","ref":"installation\/client\/trace_tlist.md","path":"installation\/client\/trace_tlist.html"}]},{"title":"上报监控数据","ref":"installation\/reprot.md","path":"installation\/reprot.html"}]},{"title":"名词解释","ref":"noun-interpretation.md","path":"noun-interpretation.html"},{"title":"常见问题","ref":"qa.md","path":"qa.html"},{"title":"首页","ref":"application-list.md","path":"application-list.html"},{"title":"调用统计","ref":"application-monitoring.md","path":"application-monitoring.html"},{"title":"链路追踪","ref":"application-tracking.md","path":"application-tracking.html"},{"title":"调试器适用场景","ref":"debug-explain.md","path":"debug-explain.html"},{"title":"调试器","ref":"debuger.md","path":"debuger.html"},{"title":"免费内存检测工具","ref":"leak.md","path":"leak.html"},{"title":"Agent列表","ref":"agent-list.md","path":"agent-list.html"},{"title":"机器信息","ref":"sysinfo.md","path":"sysinfo.html"},{"title":"报警管理","ref":"alert.md","path":"alert.html"},{"title":"项目管理","ref":"project.md","path":"project.html"},{"title":"应用管理","ref":"module.md","path":"module.html"},{"title":"接口管理","ref":"interface.md","path":"interface.html"},{"title":"用户管理","ref":"user.md","path":"user.html","children":[{"title":"第三方登录","ref":"user\/oauth-login.md","path":"user\/oauth-login.html"}]},{"title":"对外开放API","ref":"api.md","path":"api.html"},{"title":"联系我们","ref":"contact-us.md","path":"contact-us.html"}]}],"config":{"plugins":["highlight","image-zoom"],"pluginsConfig":{"highlight":{"defaultLanguage":"markup"},"theme-default":{"show_nav":true,"logo":{"image":"https:\/\/img.kancloud.cn\/4e\/45\/4e45172f86ac746e40eb69c2827ae271_157x77.png","url":"https:\/\/business.swoole.com\/"}}},"themeConfig":{"expandLevel":1,"navs":[{"title":"Swoole Tracker 详细手册","url":"http:\/\/wiki.tracker.swoole-cloud.com"},{"title":"基础手册","url":"http:\/\/base-wiki.tracker.swoole-cloud.com"}]}},"file":{"path":"installation\/server.html","content":"[TOC]\n## 依赖\n\ntracker的服务端是用来处理tracker客户端上报的数据，并展示给别人看的。\n\n### 安装docker和docker-compose\n\n系统依赖docker和docker-compose\n\n如果不了解如何部署docker，使用以下命令来进行安装（需要root权限）\n\n```bash\ncurl -fsSL https:\/\/get.docker.com -o get-docker.sh\nsh get-docker.sh\n```\n\n优先使用你的发行版提供的docker-compose进行安装\n例如\n```bash\ndnf install docker-compose # fedora\nyum install docker-compose # CentOS 7\/ RHEL7\napt-get install docker-compose # debian及其变种如Ubuntu\napk add docker-compose # alpine\npacman -S docker-compose # arch\n```\n如果你的发行版没有提供docker-compose（例如CentOS 6），\ndocker-compose二进制可以从[https:\/\/github.com\/docker\/compose\/releases](https:\/\/github.com\/docker\/compose\/releases)下载\n>[danger] 注意：docker-compose可能依赖python3\n### 启用docker daemon\n对于使用systemd的发行版（fedora，CentOS\/RHEL7，debian及其变种，arch）：\n```bash\nsystemctl start docker # 开启dockerd\nsystemctl enable docker # 启用dockerd的开机启动\n```\n>[danger]  注意：有的发行版的docker daemon的systemd单元名称不是docker，需要自行决定start和enable的名称\n\n对于使用openrc的发行版（alpine，gentoo）\n```bash\nrc-service docker start # 开启dockerd\nrc-update add docker # 启用dockerd的开机启动\n```\n对于其他sysvinit-like的启动系统\n```bash\n\/etc\/init.d\/docker start # 开启dockerd\n```\n然后参考你的发行版提供的启动管理器机制来启用开机自启\n### CentOS 8\ncentos8的官方仓库提供的是podman作为docker的替代，不完全兼容docker和docker-compose，可能存在问题，考虑使用一般的docker来进行安装:\n```bash\ndnf config-manager --add-repo=https:\/\/download.docker.com\/linux\/centos\/docker-ce.repo\ndnf install docker-ce\n```\n\n## 安装\n\n1. 进入 `swoole-admin-docker`目录\n2. 执行 `.\/build.sh`\n3. 执行 `.\/run.sh`\n\n## 访问Admin后台\n\n运行`.\/run.sh`后 直接访问当前机器的`ip:9666`即可，默认用户名是`admin`密码为`admin`\n\n>[info] 默认端口为`9666`，如果需要修改，编辑`docker\/nginx\/conf.d\/swoole-admin.conf`，修改`listen`为对应端口即可。\n\n>[danger] 安装完成后首次访问如果报错`500`，请将`data`目录删掉，执行`.\/kill.sh .\/rm.sh`后，重新执行安装步骤。\n\n## 关闭Admin后台\n\n在 `swoole-admin-docker` 目录执行 `.\/stop.sh`\n\n### 脚本说明\n\n```shell\nbuild.sh   #构建脚本\nrun.sh     #启动admin\nstop.sh    #停止admin\nrestart.sh #重启admin进程\nkill.sh    #强制关闭admin进程\nrm.sh      #删除admin的容器\n```\n\n## 重装\n\n如果不想保留之前的数据，`rm`掉整个 `swoole-admin-docker` 目录，如果想保留之前的数据请保留 `swoole-admin-docker\/data` 目录\n\n>[danger] 请不要随意移动`swoole-admin-docker\/data` 目录，可能会导致文件权限、用户组等错误，后台无法正常访问。\n\n然后再解压压缩包，执行`.\/build.sh .\/run.sh`\n\n>[danger] 重装后需要重启客户端的`node-agent`进程、`fpm`进程以及`Service`进程；\n\n","meta":{"mtime":"2020-10-01T02:43:42+00:00"}},"options":{"poweredBy":{"name":"顶想云","link":"https:\/\/www.topthink.com"}}}
+</script>
+
+    <script src="../asset/lodash/lodash.min.js?v=4.17.21"></script>
+
+    <script src="../asset/react/react.production.min.js?v=18.2.0"></script>
+
+    <script src="../asset/react-dom/react-dom.production.min.js?v=18.2.0"></script>
+
+    <script src="../asset/reader/index.js?v=1.0.66-alpha.7+5dae540"></script>
+
+    <script src="../asset/plugins/highlight/index.js?v=1.0.4"></script>
+
+    <script src="../asset/plugins/image-zoom/index.js?v=0.0.1"></script>
+
+    <script src="../asset/plugins/theme-default/index.js?v=1.0.30"></script>
+
+<script type="text/javascript">
+    TopWrite.bootstrap();
+</script>
+</body>
+</html>

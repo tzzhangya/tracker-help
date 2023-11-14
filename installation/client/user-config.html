@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>自定义配置 - Untitled</title>
+    
+    
+</head>
+<body>
+<div id="root"></div>
+<script type="application/payload+json">
+{"id":"Danza8","sha":"9b03cba29e98068f74f4a8edfa139813c3f985c3","summary":[{"title":"","articles":[{"title":"安装说明","ref":"installation.md","path":"installation.html","metadata":{"mtime":"2021-10-20T17:33:54+08:00"},"children":[{"title":"tracker服务端","ref":"installation\/server.md","path":"installation\/server.html","metadata":{"mtime":"2020-10-01T02:43:42+00:00"},"children":[{"title":"数据存储","ref":"installation\/server\/data-storage.md","path":"installation\/server\/data-storage.html","metadata":{"mtime":"2020-03-05T02:13:12+00:00"}},{"title":"更换数据存储配置","ref":"change-db.md","path":"change-db.html","metadata":{"mtime":"2020-09-23T06:27:02+00:00"}},{"title":"Server管理","ref":"installation\/server\/manage.md","path":"installation\/server\/manage.html","metadata":{"mtime":"2020-02-28T03:05:17+00:00"}},{"title":"数据清理","ref":"installation\/clean-log.md","path":"installation\/clean-log.html","metadata":{"mtime":"2021-08-25T06:03:28+00:00"}}]},{"title":"tracker客户端","ref":"installation\/client.md","path":"installation\/client.html","metadata":{"mtime":"2021-08-26T04:02:01+00:00"},"children":[{"title":"系统配置","ref":"installation\/client\/agent-config.md","path":"installation\/client\/agent-config.html","metadata":{"mtime":"2020-09-17T11:29:08+00:00"}},{"title":"自定义配置","ref":"installation\/client\/user-config.md","path":"installation\/client\/user-config.html","metadata":{"mtime":"2021-09-06T02:37:48+00:00"}},{"title":"链路追踪扩展","ref":"installation\/client\/trace_tlist.md","path":"installation\/client\/trace_tlist.html"}]},{"title":"上报监控数据","ref":"installation\/reprot.md","path":"installation\/reprot.html"}]},{"title":"名词解释","ref":"noun-interpretation.md","path":"noun-interpretation.html"},{"title":"常见问题","ref":"qa.md","path":"qa.html"},{"title":"首页","ref":"application-list.md","path":"application-list.html"},{"title":"调用统计","ref":"application-monitoring.md","path":"application-monitoring.html"},{"title":"链路追踪","ref":"application-tracking.md","path":"application-tracking.html"},{"title":"调试器适用场景","ref":"debug-explain.md","path":"debug-explain.html"},{"title":"调试器","ref":"debuger.md","path":"debuger.html"},{"title":"免费内存检测工具","ref":"leak.md","path":"leak.html"},{"title":"Agent列表","ref":"agent-list.md","path":"agent-list.html"},{"title":"机器信息","ref":"sysinfo.md","path":"sysinfo.html"},{"title":"报警管理","ref":"alert.md","path":"alert.html"},{"title":"项目管理","ref":"project.md","path":"project.html"},{"title":"应用管理","ref":"module.md","path":"module.html"},{"title":"接口管理","ref":"interface.md","path":"interface.html"},{"title":"用户管理","ref":"user.md","path":"user.html","children":[{"title":"第三方登录","ref":"user\/oauth-login.md","path":"user\/oauth-login.html"}]},{"title":"对外开放API","ref":"api.md","path":"api.html"},{"title":"联系我们","ref":"contact-us.md","path":"contact-us.html"}]}],"config":{"plugins":["highlight","image-zoom"],"pluginsConfig":{"highlight":{"defaultLanguage":"markup"},"theme-default":{"show_nav":true,"logo":{"image":"https:\/\/img.kancloud.cn\/4e\/45\/4e45172f86ac746e40eb69c2827ae271_157x77.png","url":"https:\/\/business.swoole.com\/"}}},"themeConfig":{"expandLevel":1,"navs":[{"title":"Swoole Tracker 详细手册","url":"http:\/\/wiki.tracker.swoole-cloud.com"},{"title":"基础手册","url":"http:\/\/base-wiki.tracker.swoole-cloud.com"}]}},"file":{"path":"installation\/client\/user-config.html","content":"我们提供了用户可自行修改客户端配置，文件路径为：`\/opt\/swoole\/node-agent\/src\/node.ini`\n\n请勿随意修改，目前可修改以下配置：\n\n```ini\n[agent]\n#是否打开机器上报开关\nsystem_report = 1\n#机器系统信息上报间隔时间　单位\/s\nsystem_report_interval = 60\n#worker进程数\nsystem_worker_num = 1\n\n#文件监控上报间隔时间 单位\/s\n[file_monitor_interval]\n#调用统计\nstats = 10\n#链路追踪\ntrace = 10\n#profile\nxhprof = 10\n#阻塞检查\nblock = 10\n#内存泄漏检查\nmem_leak = 10\n#调用栈\nbt = 10\n\n[zipkin]\n#zipkin地址\nhost = 127.0.0.1\nport = 9411\napi = \/api\/v2\/spans\ndebug = 0\nlog_file = \/opt\/swoole\/logs\/zipkin.log\n```\n\n>[success] 修改配置后需要重启`NodeAgent`！！！\n","meta":{"mtime":"2021-09-06T02:37:48+00:00"}},"options":{"poweredBy":{"name":"顶想云","link":"https:\/\/www.topthink.com"}}}
+</script>
+
+    <script src="../../asset/lodash/lodash.min.js?v=4.17.21"></script>
+
+    <script src="../../asset/react/react.production.min.js?v=18.2.0"></script>
+
+    <script src="../../asset/react-dom/react-dom.production.min.js?v=18.2.0"></script>
+
+    <script src="../../asset/reader/index.js?v=1.0.66-alpha.7+5dae540"></script>
+
+    <script src="../../asset/plugins/highlight/index.js?v=1.0.4"></script>
+
+    <script src="../../asset/plugins/image-zoom/index.js?v=0.0.1"></script>
+
+    <script src="../../asset/plugins/theme-default/index.js?v=1.0.30"></script>
+
+<script type="text/javascript">
+    TopWrite.bootstrap();
+</script>
+</body>
+</html>
